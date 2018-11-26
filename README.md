@@ -1,8 +1,8 @@
-# my-reads
+# readable
 
 :scroll: Readable is the second React project made for the React Udacity Nanodegree program.
 
-## Live 
+## Live
 
 You can use and access the project at: https://tavioalves.github.io/readable
 
@@ -23,7 +23,7 @@ npm start
 
 The project is organized in the following way:
 
-- src    
+- src
   - components
   - containers
   - actions
@@ -41,7 +41,7 @@ axios | Client to execute HTTP requests
 redux | Conteiner de estado previsível
 redux-thunk | Middleware para requisições assincronas
 react-redux | Ligação do React com Redux
-react-router-dom | Criador de rotas 
+react-router-dom | Criador de rotas
 react-icons | Bunch of icons for react
 react-spinners | Lib for loading spinners
 
