@@ -1,0 +1,31 @@
+body {
+  margin: 0px;
+}
+
+nav {
+  height: 75px;
+  display: flex;
+  align-items: center;
+  font-family: 'Lora', serif;
+  justify-content: space-between;
+
+  span {
+    cursor: pointer;
+    font-size: 25px;
+    font-weight: 700;
+  }
+
+  .nav-icons-container {
+    width: 60px;
+    font-size: 22px;
+    display: flex;
+    color: #BCBCBC;
+    justify-content: space-between;
+
+    .nav-icon:hover {
+      cursor: pointer;
+      color: #212529;
+      transition: color .5s;
+    }
+  }
+}
