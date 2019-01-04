@@ -1,26 +1,34 @@
 import React, { Component } from "react";
-import { MdSearch, MdMenu } from 'react-icons/md';
+import Navbar from '../components/Navbar';
+import { connect } from "react-redux";
+import { getPosts } from '../actions/PostAction';
+import { BarLoader } from 'react-spinners';
 
 class Readable extends Component {
+  componentDidMount() {
+    this.props.getPosts();
+  }
+
   render() {
     return (
       <>
+        <Navbar />
         <div className="container">
-          <nav>
-            <span>Readable</span>
-            <div className="nav-icons-container">
-              <div className="nav-icon">
-                <MdSearch />
-              </div>
-              <div className="nav-icon">
-                <MdMenu />
-              </div>
-            </div>
-          </nav>
+          <hr/>
+          {this.props.loading ? <BarLoader /> : null }
         </div>
       </>
     );
   }
 }
 
-export default Readable;
+const mapStateToProps = state => {
+  return {
+    loading: state.post.loading,
+    posts: state.post.posts
+  }
+}
+
+export default connect(mapStateToProps, {
+  getPosts
+})(Readable);

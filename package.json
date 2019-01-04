@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^3.6.0",
+    "axios": "^0.18.0",
     "bootstrap": "4",
     "node-sass": "^4.11.0",
     "react": "^16.6.3",
@@ -11,6 +12,7 @@
     "react-icons": "^3.2.2",
     "react-redux": "^6.0.0",
     "react-scripts": "2.1.1",
+    "react-spinners": "^0.4.8",
     "reactstrap": "^7.0.2",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0"
