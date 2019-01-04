@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import Navbar from '../components/Navbar';
+import Loading from '../components/Loading';
 import { connect } from "react-redux";
 import { getPosts } from '../actions/PostAction';
-import { BarLoader } from 'react-spinners';
 
 class Readable extends Component {
   componentDidMount() {
@@ -13,10 +13,7 @@ class Readable extends Component {
     return (
       <>
         <Navbar />
-        <div className="container">
-          <hr/>
-          {this.props.loading ? <BarLoader /> : null }
-        </div>
+        <Loading isTrue={this.props.loading} />
       </>
     );
   }

@@ -22,16 +22,16 @@ export const getPosts = () => {
       type: LOADING
     })
 
-    // axios
-    //   .get(`${api}/posts`, { headers })
-    //   .then(res => {
-    //     dispatch({
-    //       type: SUCCESS_GETTING_POSTS,
-    //       payload: res.data
-    //     })
-    //   })
-    //   .catch(err => {
-    //     console.log(err)
-    //   });
+    axios
+      .get(`${api}/posts`, { headers })
+      .then(res => {
+        dispatch({
+          type: SUCCESS_GETTING_POSTS,
+          payload: res.data
+        })
+      })
+      .catch(err => {
+        console.log(err)
+      });
   }
 }
