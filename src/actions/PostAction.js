@@ -1,7 +1,9 @@
 import axios from 'axios';
 import {
   LOADING,
-  SUCCESS_GETTING_POSTS
+  VOTE_POST,
+  SUCCESS_GETTING_POSTS,
+  UPDATE_POSTS
 } from './types';
 
 const api = process.env.NODE_ENV === 'development' ? "http://localhost:3001" :  '';
@@ -33,5 +35,28 @@ export const getPosts = () => {
       .catch(err => {
         console.log(err)
       });
+  }
+}
+
+export const votePost = (postId, voteOption) => {
+  return dispatch => {
+    axios({
+      method: 'post',
+      headers: headers,
+      url: `${api}/posts/${postId}`,
+      data: {
+        option: voteOption
+      }
+    })
+    .then(res => {
+      console.log(res.data)
+      dispatch({
+        type: UPDATE_POSTS,
+        payload: res.data
+      })
+    })
+    .catch(err => {
+      console.log(err);
+    });
   }
 }

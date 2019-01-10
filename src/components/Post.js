@@ -29,11 +29,11 @@ const Post = (props) => {
 
       <div className="mt-2 flex justify-content-between">
         <div className="flex align-items-center">
-          <div className="post-vote-icon">
+          <div className="post-vote-icon" onClick={() => props.votePost(post.id, "upVote")}>
             <FaThumbsUp />
           </div>
           <span className="post-vote-score">{post.voteScore}</span>
-          <div className="post-vote-icon">
+          <div className="post-vote-icon" onClick={() => props.votePost(post.id, "downVote")}>
             <FaThumbsDown />
           </div>
         </div>

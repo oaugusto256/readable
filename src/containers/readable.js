@@ -3,7 +3,7 @@ import Navbar from '../components/Navbar';
 import Loading from '../components/Loading';
 import Post from '../components/Post';
 import { connect } from "react-redux";
-import { getPosts } from '../actions/PostAction';
+import { getPosts, votePost } from '../actions/PostAction';
 import { getComments } from '../actions/CommentsAction';
 
 class Readable extends Component {
@@ -15,7 +15,13 @@ class Readable extends Component {
     return (
       <>
         {this.props.posts.map(post => {
-          return <Post post={post} />
+          return (
+            <Post
+              key={post.id}
+              post={post}
+              votePost={this.props.votePost}
+            />
+          )
         })}
       </>
     )
@@ -44,5 +50,6 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps, {
   getPosts,
-  getComments
+  votePost,
+  getComments,
 })(Readable);
