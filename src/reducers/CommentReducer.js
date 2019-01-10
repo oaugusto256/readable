@@ -1,20 +1,20 @@
 import {
   LOADING,
-  SUCCESS_GETTING_POSTS
+  SUCCESS_GETTING_COMMENTS
 } from '../actions/types';
 
 const INITIAL_STATE = {
   loading: false,
-  posts: []
+  comments: []
 };
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case SUCCESS_GETTING_POSTS:
+    case SUCCESS_GETTING_COMMENTS:
       return {
         ...state,
         loading: false,
-        posts: [...action.payload]
+        comments: [...action.payload]
       }
     case LOADING:
       return {
