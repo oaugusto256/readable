@@ -1,11 +1,31 @@
 import React, { Component } from 'react';
 import { FaThumbsUp, FaThumbsDown, FaEdit, FaTrash } from 'react-icons/fa';
-import ReactModal from 'react-modal';
+import Input from './Input';
+import Modal from './Modal';
 
 export default class Post extends Component {
   state = {
     showEdit: false,
-    showDeleteModal: false
+    showDeleteModal: false,
+    postTitle: '',
+    postContent: ''
+  }
+
+  handleInputChange = (event) => {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+  }
+
+  componentDidMount = () => {
+    this.setState({
+      postTitle: this.props.post.title,
+      postContent: this.props.post.body
+    })
   }
 
   handleOpenEdit = () => {
@@ -58,15 +78,24 @@ export default class Post extends Component {
             <p className="post-comments-count">{`${post.commentCount} comments`}</p>
           </div>
         </div>
-        <div>
-          <ReactModal
-            isOpen={this.state.showEdit}
-          >
-          <div>
-            <button onClick={this.handleCloseEdit}>Close Modal</button>
-          </div>
-            </ReactModal>
-        </div>
+        <Modal
+          title='Edit post'
+          isOpen={this.state.showEdit}
+          close={this.handleCloseEdit}
+        >
+          <Input
+              label='Title'
+              name='postTitle'
+              value={this.state.postTitle}
+              onChange={this.handleInputChange}
+          />
+          <Input
+              label='Content'
+              name='postContent'
+              value={this.state.postContent}
+              onChange={this.handleInputChange}
+          />
+        </Modal>
       </>
     )
   }
