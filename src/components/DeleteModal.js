@@ -5,7 +5,7 @@ import ReactModal from 'react-modal';
 export default (props) => {
   return (
     <ReactModal
-      className={'post-modal'}
+      className={'delete-modal'}
       isOpen={props.isOpen}
     >
       <div>
@@ -14,15 +14,15 @@ export default (props) => {
         </div>
         <strong><p className="title text-center">{props.title}</p></strong>
         <hr />
-        <div className="body">
-          {props.children}
+        <div className="body text-center">
+          <p className="mt-6">Are you <strong>sure</strong> to delete it?</p>
         </div>
         <div className="flex flex-row-reverse">
           <button
-            onClick={props.save}
+            onClick={props.delete}
             className="button-save"
           >
-            Save
+            Delete
           </button>
           <button
             className="button-cancel mr-2"

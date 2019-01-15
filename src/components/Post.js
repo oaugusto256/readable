@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { FaThumbsUp, FaThumbsDown, FaEdit, FaTrash } from 'react-icons/fa';
 import Input from './Input';
-import Modal from './Modal';
 import TextArea from './TextArea';
+import EditModal from './EditModal';
+import DeleteModal from './DeleteModal';
 
 class Post extends Component {
   state = {
@@ -29,7 +30,17 @@ class Post extends Component {
     });
   }
 
-  handleSaveEdit = () => {
+  handleDeletePost = () => {
+    const postId = this.props.post.id;
+
+    this.props.deletePost(postId);
+
+    this.setState({
+      showDeleteModal: false
+    })
+  }
+
+  handleEditPost = () => {
     const postId = this.props.post.id;
     const post = {
       title: this.state.postTitle,
@@ -51,8 +62,18 @@ class Post extends Component {
     });
   }
 
+  handleOpenDelete = () => {
+    this.setState({
+      showDeleteModal: true,
+    });
+  }
+
   handleCloseEdit = () => {
     this.setState({ showEditModal: false });
+  }
+
+  handleCloseDelete = () => {
+    this.setState({ showDeleteModal: false });
   }
 
   render() {
@@ -74,7 +95,7 @@ class Post extends Component {
                 </div>
               </div>
               <div className="post-menu-icon">
-                <FaTrash />
+                <FaTrash onClick={this.handleOpenDelete} />
               </div>
             </div>
           </div>
@@ -97,9 +118,9 @@ class Post extends Component {
             <p className="post-comments-count">{`${post.commentCount} comments`}</p>
           </div>
         </div>
-        <Modal
+        <EditModal
           title='Edit post'
-          save={this.handleSaveEdit}
+          save={this.handleEditPost}
           close={this.handleCloseEdit}
           isOpen={this.state.showEditModal}
         >
@@ -115,7 +136,13 @@ class Post extends Component {
               value={this.state.postBody}
               onChange={this.handleInputChange}
           />
-        </Modal>
+        </EditModal>
+        <DeleteModal
+          title={this.props.post.title}
+          delete={this.handleDeletePost}
+          close={this.handleCloseDelete}
+          isOpen={this.state.showDeleteModal}
+        />
       </>
     )
   }

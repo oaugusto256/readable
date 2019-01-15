@@ -1,13 +1,16 @@
 import {
   LOADING,
+  DELETE_POST,
+  UPDATE_POSTS,
   SUCCESS_GETTING_POSTS,
-  UPDATE_POSTS
 } from '../actions/types';
 
 const INITIAL_STATE = {
   loading: false,
   posts: []
 };
+
+let updatedPosts = [];
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -17,8 +20,15 @@ export default (state = INITIAL_STATE, action) => {
         loading: false,
         posts: [...action.payload]
       }
+    case DELETE_POST:
+      return {
+        ...state,
+        posts: [...state.posts.filter(post => {
+          return (post.id !== action.payload)
+        })]
+      }
     case UPDATE_POSTS:
-      const updatedPosts = state.posts.map((item) => {
+      updatedPosts = state.posts.map((item) => {
         if (item.id !== action.payload.id) {
           return item
         }

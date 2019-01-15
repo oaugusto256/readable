@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {
   LOADING,
-  VOTE_POST,
+  DELETE_POST,
   SUCCESS_GETTING_POSTS,
   UPDATE_POSTS
 } from './types';
@@ -49,7 +49,6 @@ export const votePost = (postId, voteOption) => {
       }
     })
     .then(res => {
-      console.log(res.data)
       dispatch({
         type: UPDATE_POSTS,
         payload: res.data
@@ -73,10 +72,28 @@ export const editPost = (postId, post) => {
       }
     })
     .then(res => {
-      console.log(res.data)
       dispatch({
         type: UPDATE_POSTS,
         payload: res.data
+      })
+    })
+    .catch(err => {
+      console.log(err);
+    });
+  }
+}
+
+export const deletePost = (postId) => {
+  return dispatch => {
+    axios({
+      method: 'delete',
+      headers: headers,
+      url: `${api}/posts/${postId}`
+    })
+    .then(res => {
+      dispatch({
+        type: DELETE_POST,
+        payload: res.data.id
       })
     })
     .catch(err => {
