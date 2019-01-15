@@ -2,13 +2,21 @@ import React, { Component } from 'react';
 import { FaThumbsUp, FaThumbsDown, FaEdit, FaTrash } from 'react-icons/fa';
 import Input from './Input';
 import Modal from './Modal';
+import TextArea from './TextArea';
 
-export default class Post extends Component {
+class Post extends Component {
   state = {
-    showEdit: false,
-    showDeleteModal: false,
     postTitle: '',
-    postContent: ''
+    postBody: '',
+    showEditModal: false,
+    showDeleteModal: false,
+  }
+
+  componentDidMount = () => {
+    this.setState({
+      postTitle: this.props.post.title,
+      postBody: this.props.post.body
+    })
   }
 
   handleInputChange = (event) => {
@@ -21,19 +29,30 @@ export default class Post extends Component {
     });
   }
 
-  componentDidMount = () => {
+  handleSaveEdit = () => {
+    const postId = this.props.post.id;
+    const post = {
+      title: this.state.postTitle,
+      body: this.state.postBody
+    }
+
+    this.props.editPost(postId, post);
+
     this.setState({
-      postTitle: this.props.post.title,
-      postContent: this.props.post.body
+      showEditModal: false
     })
   }
 
   handleOpenEdit = () => {
-    this.setState({ showEdit: true });
+    this.setState({
+      showEditModal: true,
+      postTitle: this.props.post.title,
+      postBody: this.props.post.body
+    });
   }
 
   handleCloseEdit = () => {
-    this.setState({ showEdit: false });
+    this.setState({ showEditModal: false });
   }
 
   render() {
@@ -80,8 +99,9 @@ export default class Post extends Component {
         </div>
         <Modal
           title='Edit post'
-          isOpen={this.state.showEdit}
+          save={this.handleSaveEdit}
           close={this.handleCloseEdit}
+          isOpen={this.state.showEditModal}
         >
           <Input
               label='Title'
@@ -89,10 +109,10 @@ export default class Post extends Component {
               value={this.state.postTitle}
               onChange={this.handleInputChange}
           />
-          <Input
-              label='Content'
-              name='postContent'
-              value={this.state.postContent}
+          <TextArea
+              label='Body'
+              name='postBody'
+              value={this.state.postBody}
               onChange={this.handleInputChange}
           />
         </Modal>
@@ -100,3 +120,5 @@ export default class Post extends Component {
     )
   }
 }
+
+export default Post;

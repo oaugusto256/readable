@@ -19,6 +19,7 @@ export default (props) => {
         </div>
         <div className="flex flex-row-reverse">
           <button
+            onClick={props.save}
             className="button-save"
           >
             Save
@@ -34,3 +35,5 @@ export default (props) => {
     </ReactModal>
   )
 }
+
+ReactModal.setAppElement('#root');

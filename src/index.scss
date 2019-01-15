@@ -193,10 +193,14 @@ nav {
 
 .button-save {
   cursor: pointer;
-  color: #212529;
+  color: white;
   font-weight: 600;
-  background-color: #BCBCBC;
-  border: #BCBCBC solid 1px;
+  background-color: #212529;
+  border: #212529 solid 1px;
   padding:  5px 20px;
   border-radius: 5px;
+}
+
+.text-area {
+  max-height: 170px;
 }

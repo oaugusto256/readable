@@ -60,3 +60,27 @@ export const votePost = (postId, voteOption) => {
     });
   }
 }
+
+export const editPost = (postId, post) => {
+  return dispatch => {
+    axios({
+      method: 'put',
+      headers: headers,
+      url: `${api}/posts/${postId}`,
+      data: {
+        title: post.title,
+        body: post.body
+      }
+    })
+    .then(res => {
+      console.log(res.data)
+      dispatch({
+        type: UPDATE_POSTS,
+        payload: res.data
+      })
+    })
+    .catch(err => {
+      console.log(err);
+    });
+  }
+}
