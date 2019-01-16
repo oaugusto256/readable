@@ -141,8 +141,93 @@ nav {
 }
 
 .post-detail {
-  
   color: #212529;
+
+  .post-title {
+    font-size: 42px;
+    font-weight: 500;
+    line-height: 53px;
+    margin-bottom: 10px;
+    color: rgba(0,0,0, 0.84);
+  }
+
+  .post-author-img {
+    width: 60px;
+    height: 60px;
+    margin-right: 20px;
+    border-radius: 100%;
+  }
+
+  .post-author {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    margin-top: 5px;
+    margin-bottom: 0px;
+    color: rgba(0,0,0, 0.84);
+  }
+
+  .post-date {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 20px;
+    margin-top: 2.5px;
+    margin-bottom: 0px;
+    color: rgba(0,0,0, 0.54);
+  }
+
+  .post-body {
+    font-size: 21px;
+    font-weight: 400;
+    line-height: 33px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    color: rgba(0,0,0, 0.54);
+  }
+
+  .post-menu-icon {
+    color: #BCBCBC;
+    cursor: pointer;
+  }
+
+  .post-menu-icon:hover {
+    color: #212529;
+    transition: color .5s;
+  }
+
+  .post-comments-count {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    margin-top: 2.5px;
+    margin-bottom: 0px;
+    color: rgba(0,0,0, 0.84);
+  }
+
+  .post-vote-score {
+    font-size: 14px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .post-vote-icon {
+    color: #BCBCBC;
+    cursor: pointer;
+  }
+
+  .post-vote-icon:hover {
+    color: #212529;
+    transition: color .5s;
+  }
+
+  .post-comments-icon {
+    color: #BCBCBC;
+  }
+
+  .post-comments-count {
+    display: flex;
+    align-items: center;
+  }
 }
 
 .edit-modal {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { FaThumbsUp, FaThumbsDown, FaEdit, FaTrash } from 'react-icons/fa';
-import { Link } from "react-router-dom";
+import { FaThumbsUp, FaThumbsDown, FaEdit, FaTrash, FaComment } from 'react-icons/fa';
+import UserImg from '../images/user.png';
 import Input from './Input';
 import TextArea from './TextArea';
 import EditModal from './EditModal';
@@ -8,8 +8,8 @@ import DeleteModal from './DeleteModal';
 
 class Post extends Component {
   state = {
-    postTitle: '',
     postBody: '',
+    postTitle: '',
     showEditModal: false,
     showDeleteModal: false,
   }
@@ -87,25 +87,19 @@ class Post extends Component {
     return (
       <>
         <div key={post.id} className="post-detail">
-          {/* <div className="flex justify-content-between">
-            <div className="flex">
-              <div className="post-menu-icon mr-2">
-                <div onClick={this.handleOpenEdit}>
-                  <FaEdit />
-                </div>
-              </div>
-              <div className="post-menu-icon">
-                <FaTrash onClick={this.handleOpenDelete} />
-              </div>
+          <p className="post-title">{post.title}</p>
+
+          <div className="flex mt-4">
+            <img src={UserImg} alt="" className="post-author-img"/>
+            <div>
+              <p className="post-author">{post.author}</p>
+              <p className="post-date">{`${month} ${day}, ${year}`}</p>
             </div>
-          </div> */}
+          </div>
 
-          <Link to={`/post/${post.id}`}><p className="post-title">{post.title}</p></Link>
           <p className="post-body">{post.body}</p>
-          <p className="post-author">{post.author}</p>
-          <p className="post-date">{`${month} ${day}, ${year}`}</p>
-
-          <div className="mt-2 flex justify-content-between">
+          <hr/>
+          <div className="mt-4 flex justify-content-between">
             <div className="flex align-items-center">
               <div className="post-vote-icon" onClick={() => votePost(post.id, "upVote")}>
                 <FaThumbsUp />
@@ -114,10 +108,19 @@ class Post extends Component {
               <div className="post-vote-icon" onClick={() => votePost(post.id, "downVote")}>
                 <FaThumbsDown />
               </div>
+              <div className="post-menu-icon ml-4 mr-2">
+                <div onClick={this.handleOpenEdit}>
+                  <FaEdit />
+                </div>
+              </div>
+              <div className="post-menu-icon ml-2">
+                <FaTrash onClick={this.handleOpenDelete} />
+              </div>
             </div>
-            <p className="post-comments-count">{`${post.commentCount} comments`}</p>
+            <p className="post-comments-count">{post.commentCount}<span className="ml-2 post-comments-icon"><FaComment /></span></p>
           </div>
         </div>
+
         <EditModal
           title='Edit post'
           save={this.handleEditPost}

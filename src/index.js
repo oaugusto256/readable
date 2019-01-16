@@ -17,8 +17,6 @@ import {
   BrowserRouter as Router
 } from "react-router-dom";
 
-
-
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.scss';
 
@@ -47,7 +45,7 @@ ReactDOM.render(
           />
           <Route
             exact
-            path={'/post/:id'}
+            path={'/:category/:id'}
             component={ViewPost}
           />
           <Route component={Error404} />

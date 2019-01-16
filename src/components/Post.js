@@ -101,7 +101,7 @@ class Post extends Component {
             </div>
           </div>
 
-          <Link to={`/post/${post.id}`}><p className="post-title">{post.title}</p></Link>
+          <Link to={`/${post.category}/${post.id}`}><p className="post-title">{post.title}</p></Link>
           <p className="post-body">{post.body}</p>
           <p className="post-author">{post.author}</p>
           <p className="post-date">{`${month} ${day}, ${year}`}</p>

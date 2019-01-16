@@ -21,7 +21,10 @@ class ViewPost extends Component {
             <div className="col-lg-2"></div>
             <div className="col-lg-8">
               <PostDetail
-                post={this.props.postDetail}
+                post={this.props.post}
+                votePost={this.props.votePost}
+                editPost={this.props.editPost}
+                deletePost={this.props.deletePost}
               />
             </div>
             <div className="col-lg-2"></div>
@@ -35,9 +38,9 @@ class ViewPost extends Component {
 const mapStateToProps = state => {
   return {
     loading: state.post.loading,
-    post: state.post.postDetail,
+    post: state.post.post,
+    postDetail: state.post.postDetail,
     postComments: state.post.comments,
-    postDetail: state.post.postDetail
   }
 }
 
@@ -45,6 +48,6 @@ export default connect(mapStateToProps, {
   votePost,
   editPost,
   deletePost,
-  getPostComments,
   getPostDetail,
+  getPostComments,
 })(ViewPost);

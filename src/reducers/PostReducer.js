@@ -10,7 +10,7 @@ import {
 const INITIAL_STATE = {
   posts: [],
   postComments: [],
-  postDetail: {},
+  post: {},
   loading: false,
 };
 
@@ -28,7 +28,7 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         loading: false,
-        postDetail: action.payload
+        post: action.payload
       }
     case SUCCESS_GETTING_POSTS:
       return {
