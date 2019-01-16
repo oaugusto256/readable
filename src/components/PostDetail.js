@@ -86,9 +86,8 @@ class Post extends Component {
 
     return (
       <>
-        <div key={post.id} className="post">
-          <div className="flex justify-content-between">
-            <p className="post-category">{post.category}</p>
+        <div key={post.id} className="post-detail">
+          {/* <div className="flex justify-content-between">
             <div className="flex">
               <div className="post-menu-icon mr-2">
                 <div onClick={this.handleOpenEdit}>
@@ -99,7 +98,7 @@ class Post extends Component {
                 <FaTrash onClick={this.handleOpenDelete} />
               </div>
             </div>
-          </div>
+          </div> */}
 
           <Link to={`/post/${post.id}`}><p className="post-title">{post.title}</p></Link>
           <p className="post-body">{post.body}</p>

@@ -2,18 +2,34 @@ import {
   LOADING,
   DELETE_POST,
   UPDATE_POSTS,
+  SUCCESS_GETTING_POST,
   SUCCESS_GETTING_POSTS,
+  SUCCESS_GETTING_POST_COMMENTS,
 } from '../actions/types';
 
 const INITIAL_STATE = {
+  posts: [],
+  postComments: [],
+  postDetail: {},
   loading: false,
-  posts: []
 };
 
 let updatedPosts = [];
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case SUCCESS_GETTING_POST_COMMENTS:
+      return {
+        ...state,
+        loading: false,
+        postComments: [...action.payload]
+      }
+    case SUCCESS_GETTING_POST:
+      return {
+        ...state,
+        loading: false,
+        postDetail: action.payload
+      }
     case SUCCESS_GETTING_POSTS:
       return {
         ...state,
@@ -29,9 +45,8 @@ export default (state = INITIAL_STATE, action) => {
       }
     case UPDATE_POSTS:
       updatedPosts = state.posts.map((item) => {
-        if (item.id !== action.payload.id) {
+        if (item.id !== action.payload.id)
           return item
-        }
 
         return {
           ...item,

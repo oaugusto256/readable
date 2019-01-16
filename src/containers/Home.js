@@ -1,12 +1,10 @@
 import React, { Component } from "react";
-import Navbar from '../components/Navbar';
 import Loading from '../components/Loading';
 import Post from '../components/Post';
 import { connect } from "react-redux";
 import { getPosts, votePost, editPost, deletePost } from '../actions/PostAction';
-import { getComments } from '../actions/CommentsAction';
 
-class Readable extends Component {
+class Home extends Component {
   componentDidMount = () => {
     this.props.getPosts();
   }
@@ -19,8 +17,8 @@ class Readable extends Component {
             <Post
               post={post}
               key={post.id}
-              editPost={this.props.editPost}
               votePost={this.props.votePost}
+              editPost={this.props.editPost}
               deletePost={this.props.deletePost}
             />
           )
@@ -32,10 +30,13 @@ class Readable extends Component {
   render() {
     return (
       <>
-        <Navbar />
         <Loading isTrue={this.props.loading} />
         <div className="container">
-          {this.renderPosts()}
+          <div className="row">
+            <div className="col-lg-9">
+              {this.renderPosts()}
+            </div>
+          </div>
         </div>
       </>
     );
@@ -55,5 +56,4 @@ export default connect(mapStateToProps, {
   votePost,
   editPost,
   deletePost,
-  getComments,
-})(Readable);
+})(Home);
