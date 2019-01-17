@@ -6,7 +6,7 @@ import TextArea from './TextArea';
 import EditModal from './EditModal';
 import DeleteModal from './DeleteModal';
 
-class Post extends Component {
+class PostDetail extends Component {
   state = {
     postBody: '',
     postTitle: '',
@@ -34,11 +34,10 @@ class Post extends Component {
   handleDeletePost = () => {
     const postId = this.props.post.id;
 
+    this.props.history.push('/');
     this.props.deletePost(postId);
 
-    this.setState({
-      showDeleteModal: false
-    })
+    this.setState({ showDeleteModal: false });
   }
 
   handleEditPost = () => {
@@ -151,4 +150,4 @@ class Post extends Component {
   }
 }
 
-export default Post;
+export default PostDetail;
