@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import reducers from "./reducers";
 
 import Home from './containers/Home';
-import ViewPost from './containers/ViewPost';
+import PostPage from './containers/PostPage';
 
 import Error from './components/Error';
 import Navbar from './components/Navbar';
@@ -46,7 +46,7 @@ ReactDOM.render(
           <Route
             exact
             path={'/:category/:id'}
-            component={ViewPost}
+            component={PostPage}
           />
           <Route component={Error404} />
         </Switch>

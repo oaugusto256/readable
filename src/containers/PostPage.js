@@ -4,7 +4,7 @@ import PostDetail from '../components/PostDetail';
 import { connect } from "react-redux";
 import { getPosts, getPostComments, votePost, editPost, deletePost } from '../actions/PostAction';
 
-class ViewPost extends Component {
+class PostPage extends Component {
   state = {
     postId: ''
   }
@@ -71,4 +71,4 @@ export default connect(mapStateToProps, {
   editPost,
   deletePost,
   getPostComments,
-})(ViewPost);
+})(PostPage);
