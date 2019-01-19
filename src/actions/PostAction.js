@@ -10,7 +10,6 @@ import {
 
 const api = process.env.NODE_ENV === 'development' ? "http://localhost:3001" :  '';
 
-// Generate a unique token for storing your bookshelf data on the backend server.
 let token = localStorage.token
 if (!token)
   token = localStorage.token = Math.random().toString(36).substr(-8)
@@ -18,47 +17,6 @@ if (!token)
 const headers = {
   'Accept': 'application/json',
   'Authorization': token
-}
-
-export const getPostComments = (postId) => {
-  return dispatch => {
-    dispatch({
-      type: LOADING
-    })
-
-    axios
-      .get(`${api}/posts/${postId}/comments`, { headers })
-      .then(res => {
-        console.log(res);
-        dispatch({
-          type: SUCCESS_GETTING_POST_COMMENTS,
-          payload: res.data
-        })
-      })
-      .catch(err => {
-        console.log(err)
-      });
-  }
-}
-
-export const getPostDetail = (postId) => {
-  return dispatch => {
-    dispatch({
-      type: LOADING
-    })
-
-    axios
-      .get(`${api}/posts/${postId}`, { headers })
-      .then(res => {
-        dispatch({
-          type: SUCCESS_GETTING_POST,
-          payload: res.data
-        })
-      })
-      .catch(err => {
-        console.log(err)
-      });
-  }
 }
 
 export const getPosts = () => {
@@ -72,6 +30,26 @@ export const getPosts = () => {
       .then(res => {
         dispatch({
           type: SUCCESS_GETTING_POSTS,
+          payload: res.data
+        })
+      })
+      .catch(err => {
+        console.log(err)
+      });
+  }
+}
+
+export const getPost = (postId) => {
+  return dispatch => {
+    dispatch({
+      type: LOADING
+    })
+
+    axios
+      .get(`${api}/posts/${postId}`, { headers })
+      .then(res => {
+        dispatch({
+          type: SUCCESS_GETTING_POST,
           payload: res.data
         })
       })
@@ -142,5 +120,25 @@ export const deletePost = (postId) => {
     .catch(err => {
       console.log(err);
     });
+  }
+}
+
+export const getPostComments = (postId) => {
+  return dispatch => {
+    dispatch({
+      type: LOADING
+    })
+
+    axios
+      .get(`${api}/posts/${postId}/comments`, { headers })
+      .then(res => {
+        dispatch({
+          type: SUCCESS_GETTING_POST_COMMENTS,
+          payload: res.data
+        })
+      })
+      .catch(err => {
+        console.log(err)
+      });
   }
 }
