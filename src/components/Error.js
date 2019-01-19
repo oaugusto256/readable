@@ -1,11 +1,10 @@
 import React from 'react';
 
-const Error = ({ codigo, mensagem, descricao }) => {
+const Error = ({ code, desc }) => {
   return (
-    <div className="container text-center mt-4">
-      <h1 className="mt-4">Erro {codigo}</h1>
-      <h5 className="mt-4">{mensagem}</h5>
-      <h5>{descricao}</h5>
+    <div className="error-container">
+      <p className="error-code">{code}</p>
+      <p className="error-desc">{desc}</p>
     </div>
   );
 }

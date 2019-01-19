@@ -4,9 +4,11 @@ import reducers from "./reducers";
 
 import Home from './containers/Home';
 import PostPage from './containers/PostPage';
+import CategoryPage from './containers/CategoryPage';
 
 import Error from './components/Error';
 import Navbar from './components/Navbar';
+import CategoriesBar from './components/CategoriesBar';
 
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
@@ -20,16 +22,6 @@ import {
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.scss';
 
-const Error404 = () => {
-  return (
-    <Error
-      codigo={"404"}
-      mensagem={"Página não encontrada."}
-      descricao={"Desculpe, porém a página que você procura não existe."}
-    />
-  );
-};
-
 const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
 
 ReactDOM.render(
@@ -37,6 +29,7 @@ ReactDOM.render(
     <Router>
       <>
         <Navbar />
+        <CategoriesBar />
         <Switch>
           <Route
             exact
@@ -45,10 +38,14 @@ ReactDOM.render(
           />
           <Route
             exact
+            path={'/:category'}
+            component={CategoryPage}
+          />
+          <Route
+            exact
             path={'/:category/:id'}
             component={PostPage}
           />
-          <Route component={Error404} />
         </Switch>
       </>
     </Router>

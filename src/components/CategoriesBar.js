@@ -1,40 +1,36 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { getCategories } from '../actions/CategoryAction';
-import Loading from '../components/Loading';
+import { Link } from 'react-router-dom';
 
 class CategoriesBar extends Component {
   componentDidMount =  () => {
     this.props.getCategories();
   }
 
-  renderCategories = () => {
-    if(this.props.loading) {
-      return (
-        <Loading isTrue={this.props.loading} />
-      )
-    } else {
-      return (
-        <div className="categories-container">
-          {this.props.categories.map(categorie => {
-            return <div className="categorie" key={categorie.name}>{categorie.name}</div>
-          })}
-        </div>
-      )
-    }
-  }
-
   render () {
     return (
-      this.renderCategories()
+      <div className="container">
+        <div className="categories-container">
+          {this.props.categories.map(category => {
+            return (
+              <Link key={category.name} to={`/${category.path}`}>
+                <div className="categorie">
+                  {category.name}
+                </div>
+              </Link>
+            )
+          })}
+        </div>
+      </div>
     )
   }
 }
 
 const mapStateToProps = state => {
   return {
-    loading: state.categorie.loading,
-    categories: state.categorie.categories
+    loading: state.category.loading,
+    categories: state.category.categories
   }
 }
 

@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 import PostReducer from './PostReducer';
 import CommentReducer from './CommentReducer';
-import CategorieReducer from './CategoryReducer';
+import CategoryReducer from './CategoryReducer';
 
 export default combineReducers({
   post: PostReducer,
   comment: CommentReducer,
-  categorie: CategorieReducer
+  category: CategoryReducer
 });
