@@ -120,7 +120,7 @@ class Post extends Component {
           </div>
         </div>
         <EditModal
-          title='Edit post'
+          title='Edit story'
           save={this.handleEditPost}
           close={this.handleCloseEdit}
           isOpen={this.state.showEditModal}

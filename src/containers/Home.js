@@ -1,46 +1,22 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getPosts, votePost, editPost, deletePost } from '../actions/PostAction';
-import Post from '../components/Post';
+import ListPosts from '../components/ListPosts';
 
 class Home extends Component {
   componentDidMount = () => {
     this.props.getPosts();
   }
 
-  renderPosts = () => {
-    return (
-      <>
-        {this.props.posts.map(post => {
-          return (
-            <Post
-              post={post}
-              key={post.id}
-              votePost={this.props.votePost}
-              editPost={this.props.editPost}
-              deletePost={this.props.deletePost}
-            />
-          )
-        })}
-      </>
-    )
-  }
-
   render() {
     return (
-      <>
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-10">
-              {this.renderPosts()}
-            </div>
-            <div className="col-lg-2">
-              <button>Create new post</button>
-            </div>
-          </div>
-        </div>
-      </>
-    );
+      <ListPosts
+        posts={this.props.posts}
+        votePost={this.props.votePost}
+        editPost={this.props.editPost}
+        deletePost={this.props.deletePost}
+      />
+    )
   }
 }
 

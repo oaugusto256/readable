@@ -6,7 +6,6 @@ import Home from './containers/Home';
 import PostPage from './containers/PostPage';
 import CategoryPage from './containers/CategoryPage';
 
-import Error from './components/Error';
 import Navbar from './components/Navbar';
 import CategoriesBar from './components/CategoriesBar';
 
