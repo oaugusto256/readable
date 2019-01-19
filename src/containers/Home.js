@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import Loading from '../components/Loading';
-import Post from '../components/Post';
 import { connect } from "react-redux";
+import Post from '../components/Post';
+import Loading from '../components/Loading';
+import CategoriesBar from "../components/CategoriesBar";
 import { getPosts, votePost, editPost, deletePost } from '../actions/PostAction';
 
 class Home extends Component {
@@ -32,6 +33,7 @@ class Home extends Component {
       <>
         <Loading isTrue={this.props.loading} />
         <div className="container">
+          <CategoriesBar />
           <div className="row">
             <div className="col-lg-9">
               {this.renderPosts()}

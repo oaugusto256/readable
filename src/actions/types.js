@@ -12,3 +12,6 @@ export const SUCCESS_GETTING_POST_COMMENTS = 'success_getting_post_comments';
 
 // Comments
 export const SUCCESS_GETTING_COMMENTS = 'success_getting_comments';
+
+// Categories
+export const SUCCESS_GETTING_CATEGORIES = 'success_getting_categories';
