@@ -5,13 +5,14 @@ import {
   SUCCESS_GETTING_POST,
   SUCCESS_CREATING_POST,
   SUCCESS_GETTING_POSTS,
+  SUCCESS_CREATING_COMMENT,
   SUCCESS_GETTING_POST_COMMENTS,
 } from '../actions/types';
 
 const INITIAL_STATE = {
+  post: {},
   posts: [],
   postComments: [],
-  post: {},
   loading: false,
 };
 
@@ -19,6 +20,12 @@ let updatedPosts = [];
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case SUCCESS_CREATING_COMMENT:
+      return {
+        ...state,
+        loading: false,
+        postComments: [...state.postComments, action.payload]
+      }
     case SUCCESS_CREATING_POST:
       return {
         ...state,

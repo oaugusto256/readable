@@ -13,6 +13,7 @@ export const SUCCESS_GETTING_POST_COMMENTS = 'success_getting_post_comments';
 
 // Comments
 export const SUCCESS_GETTING_COMMENTS = 'success_getting_comments';
+export const SUCCESS_CREATING_COMMENT = 'success_creating_comment';
 
 // Categories
 export const SUCCESS_GETTING_CATEGORIES = 'success_getting_categories';

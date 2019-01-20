@@ -6,6 +6,7 @@ import {
   SUCCESS_GETTING_POST,
   SUCCESS_GETTING_POSTS,
   SUCCESS_CREATING_POST,
+  SUCCESS_CREATING_COMMENT,
   SUCCESS_GETTING_POST_COMMENTS
 } from './types';
 
@@ -172,5 +173,35 @@ export const getPostComments = (postId) => {
       .catch(err => {
         console.log(err)
       });
+  }
+}
+
+export const createComment = (comment) => {
+  return dispatch => {
+    dispatch({
+      type: LOADING
+    })
+
+    axios({
+      method: 'post',
+      headers: headers,
+      url: `${api}/comments`,
+      data: {
+        id: Math.random().toString(36).substr(-8),
+        timestamp: Date.now(),
+        body: comment.body,
+        author: comment.author,
+        parentId: comment.parentId
+      }
+    })
+    .then(res => {
+      dispatch({
+        type: SUCCESS_CREATING_COMMENT,
+        payload: res.data
+      })
+    })
+    .catch(err => {
+      console.log(err)
+    });
   }
 }

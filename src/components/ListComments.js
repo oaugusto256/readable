@@ -1,39 +1,15 @@
 /* eslint-disable react/style-prop-object */
 import React, { Component } from 'react';
+import TextArea from './TextArea';
 import Comment from './Comment';
 import Button from './Button';
 import Error from './Error';
-import CreateModal from './CreateModal';
 import Input from './Input';
-import TextArea from './TextArea';
-import _ from 'underscore';
 
 export default class ListComments extends Component {
   state = {
-    postBody: '',
-    postTitle: '',
-    postAuthor: '',
-    postCategory: '',
-    showCreateModal: false,
-  }
-
-  handleCreatePost = () => {
-    const post = {
-      title: this.state.postTitle,
-      body: this.state.postBody,
-      author: this.state.postAuthor,
-      category: this.state.postCategory
-    }
-
-    this.props.createPost(post);
-
-    this.setState({
-      postBody: '',
-      postTitle: '',
-      postAuthor: '',
-      postCategory: '',
-      showCreateModal: false,
-    })
+    commentBody: '',
+    commentAuthor: ''
   }
 
   handleInputChange = (event) => {
@@ -46,20 +22,14 @@ export default class ListComments extends Component {
     });
   }
 
-  handleOpenCreate = () => {
-    this.setState({
-      postBody: '',
-      postTitle: '',
-      postAuthor: '',
-      postCategory: '',
-      showCreateModal: true,
-    })
-  }
+  handleCreateComment = () => {
+    const comment = {
+      parentId: this.props.postId,
+      body: this.state.commentBody,
+      author: this.state.commentAuthor
+    }
 
-  handleCloseCreate = () => {
-    this.setState({
-      showCreateModal: false
-    });
+    this.props.createComment(comment);
   }
 
   renderComments = () => {
@@ -71,11 +41,13 @@ export default class ListComments extends Component {
           <div className="create-comment-container">
             <p>Write a response...</p>
             <div>
-              <textarea name="" />
+              <Input label="Author" name="commentAuthor" onChange={this.handleInputChange} value={this.state.commentAuthor} autoFocus/>
+              <TextArea label="Response" name="commentBody" value={this.state.commentBody} onChange={this.handleInputChange} />
             </div>
             <Button
               name={'Publish'}
               style={'button-save'}
+              onClick={this.handleCreateComment}
             />
           </div>
 

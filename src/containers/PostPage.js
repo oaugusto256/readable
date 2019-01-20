@@ -3,7 +3,7 @@ import Loading from '../components/Loading';
 import PostDetail from '../components/PostDetail';
 import ListComments from '../components/ListComments';
 import { connect } from "react-redux";
-import { getPosts, getPostComments, votePost, editPost, deletePost } from '../actions/PostAction';
+import { getPosts, getPostComments, votePost, editPost, deletePost, createComment } from '../actions/PostAction';
 
 class PostPage extends Component {
   state = {
@@ -12,14 +12,13 @@ class PostPage extends Component {
 
   componentDidMount = async () => {
     const postId = this.props.match.params.id;
+    this.setState({ postId });
 
     await this.props.getPosts();
     await this.props.getPostComments(postId);
-
-    this.setState({ postId });
   }
 
-  renderPostDetail = () => {
+  render() {
     let post = undefined;
 
     this.props.posts.forEach(postToCheck => {
@@ -27,24 +26,6 @@ class PostPage extends Component {
         post = postToCheck
     })
 
-    if(this.props.loading) {
-      return (
-        <Loading isTrue={this.props.loading} />
-      )
-    } else {
-      return (
-        <PostDetail
-          post={post}
-          history={this.props.history}
-          votePost={this.props.votePost}
-          editPost={this.props.editPost}
-          deletePost={this.props.deletePost}
-        />
-      )
-    }
-  }
-
-  render() {
     return (
       <>
         {this.props.loading
@@ -53,8 +34,18 @@ class PostPage extends Component {
               <div className="row">
                 <div className="col-lg-2"></div>
                 <div className="col-lg-8">
-                  {this.renderPostDetail()}
-                  <ListComments comments={this.props.comments} />
+                  <PostDetail
+                    post={post}
+                    history={this.props.history}
+                    votePost={this.props.votePost}
+                    editPost={this.props.editPost}
+                    deletePost={this.props.deletePost}
+                  />
+                  <ListComments
+                    postId={this.state.postId}
+                    comments={this.props.comments}
+                    createComment={this.props.createComment}
+                  />
                 </div>
                 <div className="col-lg-2"></div>
               </div>
@@ -77,5 +68,6 @@ export default connect(mapStateToProps, {
   votePost,
   editPost,
   deletePost,
+  createComment,
   getPostComments,
 })(PostPage);
