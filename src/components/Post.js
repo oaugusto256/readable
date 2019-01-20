@@ -8,16 +8,16 @@ import DeleteModal from './DeleteModal';
 
 class Post extends Component {
   state = {
-    postTitle: '',
     postBody: '',
+    postTitle: '',
     showEditModal: false,
     showDeleteModal: false,
   }
 
   componentDidMount = () => {
     this.setState({
+      postBody: this.props.post.body,
       postTitle: this.props.post.title,
-      postBody: this.props.post.body
     })
   }
 
@@ -77,9 +77,12 @@ class Post extends Component {
     this.setState({ showDeleteModal: false });
   }
 
+  renderPostComments = () => {
+
+  }
+
   render() {
     const { post, votePost } = this.props;
-    console.log(post);
 
     const day = Date(post.timestamp*1000).substring(8,10);
     const month =  Date(post.timestamp*1000).substring(4,7);

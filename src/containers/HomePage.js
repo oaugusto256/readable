@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { getPosts, createPost, votePost, editPost, deletePost } from '../actions/PostAction';
 import ListPosts from '../components/ListPosts';
 
-class Home extends Component {
+class HomePage extends Component {
   componentDidMount = () => {
     this.props.getPosts();
   }
@@ -35,4 +35,4 @@ export default connect(mapStateToProps, {
   editPost,
   createPost,
   deletePost,
-})(Home);
+})(HomePage);

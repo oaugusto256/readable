@@ -9,6 +9,7 @@ a {
 
 body {
   margin: 0px;
+  background-color: #FAFAFA;
   font-family: 'Lora', serif;
 }
 
@@ -144,6 +145,7 @@ nav {
 
 .post-detail {
   color: #212529;
+  margin-bottom: 20px;
 
   .post-title {
     font-size: 42px;
@@ -424,5 +426,94 @@ nav {
     font-size: 16px;
     font-weight: 600;
     margin-bottom: 2.5px;
+  }
+}
+
+.comment-container {
+  width: 100%;
+  background: #FFF;
+  border-radius: 2.5px;
+  margin-bottom: 20px;
+  padding: 15px;
+
+  -webkit-box-shadow: 0px 0px 2.5px 0px rgba(0,0,0,0.25);
+  -moz-box-shadow: 0px 0px 2.5px 0px rgba(0,0,0,0.25);
+  box-shadow: 0px 0px 2.5px 0px rgba(0,0,0,0.25);
+
+  .author-img {
+    width: 40px;
+    height: 40px;
+    margin-right: 20px;
+    border-radius: 100%;
+  }
+
+  .author {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    margin-top: 5px;
+    margin-bottom: 0px;
+    color: rgba(0,0,0, 0.84);
+  }
+
+  .date {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 20px;
+    margin-bottom: 0px;
+    color: rgba(0,0,0, 0.54);
+  }
+
+  .body {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 33px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    color: rgba(0,0,0, 0.54);
+  }
+
+  .menu-icon {
+    color: #BCBCBC;
+    cursor: pointer;
+  }
+
+  .menu-icon:hover {
+    color: #212529;
+    transition: color .5s;
+  }
+
+  .comments-count {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    margin-top: 2.5px;
+    margin-bottom: 0px;
+    color: rgba(0,0,0, 0.84);
+  }
+
+  .vote-score {
+    font-size: 14px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .vote-icon {
+    color: #BCBCBC;
+    cursor: pointer;
+  }
+
+  .vote-icon:hover {
+    color: #212529;
+    transition: color .5s;
+  }
+
+  .comments-icon {
+    color: #BCBCBC;
+  }
+
+  .comments-count {
+    display: flex;
+    align-items: center;
   }
 }

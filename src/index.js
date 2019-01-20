@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import reducers from "./reducers";
 
-import Home from './containers/Home';
+import HomePage from './containers/HomePage';
 import PostPage from './containers/PostPage';
 import CategoryPage from './containers/CategoryPage';
 
@@ -33,7 +33,7 @@ ReactDOM.render(
           <Route
             exact
             path={'/'}
-            component={Home}
+            component={HomePage}
           />
           <Route
             exact

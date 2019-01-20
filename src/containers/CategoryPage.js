@@ -24,10 +24,7 @@ class CategoryPage extends Component {
   }
 
   render() {
-    let filteredPosts = this.props.posts.filter(post => {
-      if(post.category === this.state.category)
-        return post;
-    })
+    let filteredPosts = this.props.posts.filter(post => post.category === this.state.category ? post: null);
 
     return (
       <ListPosts
