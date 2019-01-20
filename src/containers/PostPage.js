@@ -1,42 +1,46 @@
 import React, { Component } from "react";
 import Loading from '../components/Loading';
 import PostDetail from '../components/PostDetail';
+import Error from '../components/Error';
 import { connect } from "react-redux";
 import { getPosts, getPostComments, votePost, editPost, deletePost } from '../actions/PostAction';
-import { FaThumbsUp, FaThumbsDown, FaEdit, FaTrash, FaComment } from 'react-icons/fa';
+import { FaThumbsUp, FaThumbsDown, FaEdit, FaTrash } from 'react-icons/fa';
 import UserImg from '../images/user.png';
 
 class PostPage extends Component {
   state = {
-    postId: '',
-    loading: false
+    postId: ''
   }
 
   componentDidMount = async () => {
     const postId = this.props.match.params.id;
 
-    this.setState({ loading: true })
-
     await this.props.getPosts();
     await this.props.getPostComments(postId);
 
-    this.setState({ postId, loading: false });
+    this.setState({ postId });
   }
 
   renderPostDetail = () => {
-    const filteredPost = this.props.posts.filter(post => {
-      if (post.id === this.state.postId) {
-        return post
-      }
+    let post = undefined;
+
+    this.props.posts.forEach(postToCheck => {
+      if(this.state.postId === postToCheck.id)
+        post = postToCheck
     })
 
-    if(filteredPost.length === 0) {
-      return <Loading isTrue={this.state.loading} />
+    if(this.props.loading) {
+      return <Loading isTrue={this.props.loading} />
+    } else if (post === undefined) {
+      return <Error
+                code={'404'}
+                desc={'We couldn’t find any story with this specific ID.'}
+              />
     } else {
       return (
         <PostDetail
-          post={filteredPost[0]}
-          key={filteredPost[0].id}
+          post={post}
+          key={post.id}
           history={this.props.history}
           votePost={this.props.votePost}
           editPost={this.props.editPost}
@@ -97,7 +101,7 @@ class PostPage extends Component {
         {this.props.loading
           ? <Loading isTrue={this.props.loading} />
           : <div className="container">
-              <div className="row mt-4">
+              <div className="row">
                 <div className="col-lg-2"></div>
                 <div className="col-lg-8">
                   {this.renderPostDetail()}
