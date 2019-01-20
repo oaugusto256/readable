@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { getCategoryPosts } from '../actions/CategoryAction';
 import { getPosts, createPost, votePost, editPost, deletePost } from '../actions/PostAction';
 import ListPosts from "../components/ListPosts";
+import Loading from '../components/Loading';
 
 class CategoryPage extends Component {
   state = {
@@ -26,21 +27,28 @@ class CategoryPage extends Component {
   render() {
     let filteredPosts = this.props.posts.filter(post => post.category === this.state.category ? post: null);
 
-    return (
-      <ListPosts
-        posts={filteredPosts}
-        votePost={this.props.votePost}
-        editPost={this.props.editPost}
-        createPost={this.props.createPost}
-        deletePost={this.props.deletePost}
-      />
-    )
+    if (this.props.loading) {
+      return (
+        <Loading isTrue={this.props.loading} />
+      )
+    } else {
+      return (
+        <ListPosts
+          posts={filteredPosts}
+          votePost={this.props.votePost}
+          editPost={this.props.editPost}
+          createPost={this.props.createPost}
+          deletePost={this.props.deletePost}
+        />
+      )
+    }
   }
 }
 
 const mapStateToProps = state => {
   return {
-    posts: state.post.posts
+    posts: state.post.posts,
+    loading: state.post.loading
   }
 }
 

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getPosts, createPost, votePost, editPost, deletePost } from '../actions/PostAction';
 import ListPosts from '../components/ListPosts';
+import Loading from '../components/Loading';
 
 class HomePage extends Component {
   componentDidMount = () => {
@@ -9,15 +10,21 @@ class HomePage extends Component {
   }
 
   render() {
-    return (
-      <ListPosts
-        posts={this.props.posts}
-        votePost={this.props.votePost}
-        editPost={this.props.editPost}
-        createPost={this.props.createPost}
-        deletePost={this.props.deletePost}
-      />
-    )
+    if (this.props.loading) {
+      return (
+        <Loading isTrue={this.props.loading} />
+      )
+    } else {
+      return (
+        <ListPosts
+          posts={this.props.posts}
+          votePost={this.props.votePost}
+          editPost={this.props.editPost}
+          createPost={this.props.createPost}
+          deletePost={this.props.deletePost}
+        />
+      )
+    }
   }
 }
 
