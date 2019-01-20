@@ -5,6 +5,7 @@ import Input from './Input';
 import TextArea from './TextArea';
 import EditModal from './EditModal';
 import DeleteModal from './DeleteModal';
+import Error from '../components/Error';
 
 class PostDetail extends Component {
   state = {
@@ -12,13 +13,6 @@ class PostDetail extends Component {
     postTitle: '',
     showEditModal: false,
     showDeleteModal: false,
-  }
-
-  componentDidMount = () => {
-    this.setState({
-      postTitle: this.props.post.title,
-      postBody: this.props.post.body
-    })
   }
 
   handleInputChange = (event) => {
@@ -79,74 +73,83 @@ class PostDetail extends Component {
   render() {
     const { post, votePost } = this.props;
 
-    const day = Date(post.timestamp*1000).substring(8,10);
-    const month =  Date(post.timestamp*1000).substring(4,7);
-    const year =  Date(post.timestamp*1000).substring(11,15);
+    if(post !== undefined) {
+      const day = Date(post.timestamp*1000).substring(8,10);
+      const month =  Date(post.timestamp*1000).substring(4,7);
+      const year =  Date(post.timestamp*1000).substring(11,15);
 
-    return (
-      <>
-        <div key={post.id} className="post-detail">
-          <p className="post-title">{post.title}</p>
+      return (
+        <>
+          <div key={post.id} className="post-detail">
+            <p className="post-title">{post.title}</p>
 
-          <div className="flex mt-4">
-            <img src={UserImg} alt="" className="post-author-img"/>
-            <div>
-              <p className="post-author">{post.author}</p>
-              <p className="post-date">{`${month} ${day}, ${year}`}</p>
+            <div className="flex mt-4">
+              <img src={UserImg} alt="" className="post-author-img"/>
+              <div>
+                <p className="post-author">{post.author}</p>
+                <p className="post-date">{`${month} ${day}, ${year}`}</p>
+              </div>
             </div>
-          </div>
 
-          <p className="post-body">{post.body}</p>
-          <hr/>
-          <div className="mt-4 flex justify-content-between">
-            <div className="flex align-items-center">
-              <div className="post-vote-icon" onClick={() => votePost(post.id, "upVote")}>
-                <FaThumbsUp />
-              </div>
-              <span className="post-vote-score">{post.voteScore}</span>
-              <div className="post-vote-icon" onClick={() => votePost(post.id, "downVote")}>
-                <FaThumbsDown />
-              </div>
-              <div className="post-menu-icon ml-4 mr-2">
-                <div onClick={this.handleOpenEdit}>
-                  <FaEdit />
+            <p className="post-body">{post.body}</p>
+            <hr/>
+            <div className="mt-4 flex justify-content-between">
+              <div className="flex align-items-center">
+                <div className="post-vote-icon" onClick={() => votePost(post.id, "upVote")}>
+                  <FaThumbsUp />
+                </div>
+                <span className="post-vote-score">{post.voteScore}</span>
+                <div className="post-vote-icon" onClick={() => votePost(post.id, "downVote")}>
+                  <FaThumbsDown />
+                </div>
+                <div className="post-menu-icon ml-4 mr-2">
+                  <div onClick={this.handleOpenEdit}>
+                    <FaEdit />
+                  </div>
+                </div>
+                <div className="post-menu-icon ml-2">
+                  <FaTrash onClick={this.handleOpenDelete} />
                 </div>
               </div>
-              <div className="post-menu-icon ml-2">
-                <FaTrash onClick={this.handleOpenDelete} />
-              </div>
+              <p className="post-comments-count">{post.commentCount}<span className="ml-2 post-comments-icon"><FaComment /></span></p>
             </div>
-            <p className="post-comments-count">{post.commentCount}<span className="ml-2 post-comments-icon"><FaComment /></span></p>
           </div>
-        </div>
 
-        <EditModal
-          title='Edit post'
-          save={this.handleEditPost}
-          close={this.handleCloseEdit}
-          isOpen={this.state.showEditModal}
-        >
-          <Input
-              label='Title'
-              name='postTitle'
-              value={this.state.postTitle}
-              onChange={this.handleInputChange}
+          <EditModal
+            title='Edit post'
+            save={this.handleEditPost}
+            close={this.handleCloseEdit}
+            isOpen={this.state.showEditModal}
+          >
+            <Input
+                label='Title'
+                name='postTitle'
+                value={this.state.postTitle}
+                onChange={this.handleInputChange}
+            />
+            <TextArea
+                label='Body'
+                name='postBody'
+                value={this.state.postBody}
+                onChange={this.handleInputChange}
+            />
+          </EditModal>
+          <DeleteModal
+            title={this.props.post.title}
+            delete={this.handleDeletePost}
+            close={this.handleCloseDelete}
+            isOpen={this.state.showDeleteModal}
           />
-          <TextArea
-              label='Body'
-              name='postBody'
-              value={this.state.postBody}
-              onChange={this.handleInputChange}
-          />
-        </EditModal>
-        <DeleteModal
-          title={this.props.post.title}
-          delete={this.handleDeletePost}
-          close={this.handleCloseDelete}
-          isOpen={this.state.showDeleteModal}
+        </>
+      )
+    } else {
+      return (
+        <Error
+          code={'404'}
+          desc={'We couldn’t find any story with this specific ID.'}
         />
-      </>
-    )
+      )
+    }
   }
 }
 

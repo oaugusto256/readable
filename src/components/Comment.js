@@ -1,24 +1,17 @@
 import React, { Component } from 'react';
 import { FaThumbsUp, FaThumbsDown, FaEdit, FaTrash } from 'react-icons/fa';
-import { Link } from "react-router-dom";
+import UserImg from '../images/user.png';
 import Input from './Input';
 import TextArea from './TextArea';
 import EditModal from './EditModal';
 import DeleteModal from './DeleteModal';
 
-class Post extends Component {
+class Comment extends Component {
   state = {
-    postBody: '',
-    postTitle: '',
+    commentBody: '',
+    commentTitle: '',
     showEditModal: false,
     showDeleteModal: false,
-  }
-
-  componentDidMount = () => {
-    this.setState({
-      postBody: this.props.post.body,
-      postTitle: this.props.post.title,
-    })
   }
 
   handleInputChange = (event) => {
@@ -31,7 +24,7 @@ class Post extends Component {
     });
   }
 
-  handleDeletePost = () => {
+  handleDeleteComment = () => {
     const postId = this.props.post.id;
 
     this.props.deletePost(postId);
@@ -41,7 +34,7 @@ class Post extends Component {
     })
   }
 
-  handleEditPost = () => {
+  handleEditComment = () => {
     const postId = this.props.post.id;
     const post = {
       title: this.state.postTitle,
@@ -58,8 +51,8 @@ class Post extends Component {
   handleOpenEdit = () => {
     this.setState({
       showEditModal: true,
-      postTitle: this.props.post.title,
-      postBody: this.props.post.body
+      commentTitle: this.props.post.title,
+      commentBody: this.props.post.body
     });
   }
 
@@ -82,48 +75,45 @@ class Post extends Component {
   }
 
   render() {
-    const { post, votePost } = this.props;
+    const { comment, votePost } = this.props;
 
-    const day = Date(post.timestamp*1000).substring(8,10);
-    const month =  Date(post.timestamp*1000).substring(4,7);
-    const year =  Date(post.timestamp*1000).substring(11,15);
+    const day = Date(comment.timestamp*1000).substring(8,10);
+    const month =  Date(comment.timestamp*1000).substring(4,7);
+    const year =  Date(comment.timestamp*1000).substring(11,15);
 
     return (
       <>
-        <div key={post.id} className="post">
-          <div className="flex justify-content-between">
-            <p className="post-category">{post.category}</p>
-            <div className="flex">
-              <div className="post-menu-icon mr-2">
+        <div key={comment.id} className="comment-container">
+          <div className="flex align-items-center">
+            <img src={UserImg} alt="" className="author-img"/>
+            <div>
+              <p className="author">{comment.author}</p>
+              <p className="date">{`${month} ${day}, ${year}`}</p>
+            </div>
+          </div>
+          <p className="body">{comment.body}</p>
+          <hr/>
+          <div className="mt-4 flex justify-content-between">
+            <div className="flex align-items-center">
+              <div className="vote-icon" onClick={() => console.log("Up vote!")}>
+                <FaThumbsUp />
+              </div>
+              <span className="vote-score">{comment.voteScore}</span>
+              <div className="vote-icon" onClick={() => console.log("Down vote!")}>
+                <FaThumbsDown />
+              </div>
+              <div className="menu-icon ml-4 mr-2">
                 <div onClick={this.handleOpenEdit}>
                   <FaEdit />
                 </div>
               </div>
-              <div className="post-menu-icon">
+              <div className="menu-icon ml-2">
                 <FaTrash onClick={this.handleOpenDelete} />
               </div>
             </div>
           </div>
-
-          <Link to={`/${post.category}/${post.id}`}><p className="post-title">{post.title}</p></Link>
-          <p className="post-body">{post.body}</p>
-          <p className="post-author">{post.author}</p>
-          <p className="post-date">{`${month} ${day}, ${year}`}</p>
-
-          <div className="mt-2 flex justify-content-between">
-            <div className="flex align-items-center">
-              <div className="post-vote-icon" onClick={() => votePost(post.id, "upVote")}>
-                <FaThumbsUp />
-              </div>
-              <span className="post-vote-score">{post.voteScore}</span>
-              <div className="post-vote-icon" onClick={() => votePost(post.id, "downVote")}>
-                <FaThumbsDown />
-              </div>
-            </div>
-            <p className="post-comments-count">{`${post.commentCount} responses`}</p>
-          </div>
         </div>
-        <EditModal
+        {/* <EditModal
           title='Edit story'
           edit={this.handleEditPost}
           close={this.handleCloseEdit}
@@ -147,10 +137,10 @@ class Post extends Component {
           delete={this.handleDeletePost}
           close={this.handleCloseDelete}
           isOpen={this.state.showDeleteModal}
-        />
+        /> */}
       </>
     )
   }
 }
 
-export default Post;
+export default Comment;
