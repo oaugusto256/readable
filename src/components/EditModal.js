@@ -19,10 +19,10 @@ export default (props) => {
         </div>
         <div className="flex flex-row-reverse">
           <button
-            onClick={props.save}
+            onClick={props.edit}
             className="button-save"
           >
-            Save
+            Edit
           </button>
           <button
             className="button-cancel mr-2"

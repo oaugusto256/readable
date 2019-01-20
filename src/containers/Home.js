@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getPosts, votePost, editPost, deletePost } from '../actions/PostAction';
+import { getPosts, createPost, votePost, editPost, deletePost } from '../actions/PostAction';
 import ListPosts from '../components/ListPosts';
 
 class Home extends Component {
@@ -14,6 +14,7 @@ class Home extends Component {
         posts={this.props.posts}
         votePost={this.props.votePost}
         editPost={this.props.editPost}
+        createPost={this.props.createPost}
         deletePost={this.props.deletePost}
       />
     )
@@ -32,5 +33,6 @@ export default connect(mapStateToProps, {
   getPosts,
   votePost,
   editPost,
+  createPost,
   deletePost,
 })(Home);

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getCategoryPosts } from '../actions/CategoryAction';
-import { getPosts, votePost, editPost, deletePost } from '../actions/PostAction';
+import { getPosts, createPost, votePost, editPost, deletePost } from '../actions/PostAction';
 import ListPosts from "../components/ListPosts";
 
 class CategoryPage extends Component {
@@ -34,6 +34,7 @@ class CategoryPage extends Component {
         posts={filteredPosts}
         votePost={this.props.votePost}
         editPost={this.props.editPost}
+        createPost={this.props.createPost}
         deletePost={this.props.deletePost}
       />
     )
@@ -51,5 +52,6 @@ export default connect(mapStateToProps, {
   votePost,
   editPost,
   deletePost,
+  createPost,
   getCategoryPosts,
 })(CategoryPage);

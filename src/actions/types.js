@@ -6,6 +6,7 @@ export const ERROR_GETTING = 'error_getting';
 export const VOTE_POST = 'vote_post';
 export const DELETE_POST = 'delete_post';
 export const UPDATE_POSTS = 'update_posts';
+export const SUCCESS_CREATING_POST = 'success_creating_post';
 export const SUCCESS_GETTING_POST = 'success_getting_post';
 export const SUCCESS_GETTING_POSTS = 'success_getting_posts';
 export const SUCCESS_GETTING_POST_COMMENTS = 'success_getting_post_comments';

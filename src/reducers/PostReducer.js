@@ -3,6 +3,7 @@ import {
   DELETE_POST,
   UPDATE_POSTS,
   SUCCESS_GETTING_POST,
+  SUCCESS_CREATING_POST,
   SUCCESS_GETTING_POSTS,
   SUCCESS_GETTING_POST_COMMENTS,
 } from '../actions/types';
@@ -18,6 +19,12 @@ let updatedPosts = [];
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case SUCCESS_CREATING_POST:
+      return {
+        ...state,
+        loading: false,
+        posts: [...state.posts, action.payload]
+      }
     case SUCCESS_GETTING_POST_COMMENTS:
       return {
         ...state,

@@ -79,6 +79,7 @@ class Post extends Component {
 
   render() {
     const { post, votePost } = this.props;
+    console.log(post);
 
     const day = Date(post.timestamp*1000).substring(8,10);
     const month =  Date(post.timestamp*1000).substring(4,7);
@@ -121,7 +122,7 @@ class Post extends Component {
         </div>
         <EditModal
           title='Edit story'
-          save={this.handleEditPost}
+          edit={this.handleEditPost}
           close={this.handleCloseEdit}
           isOpen={this.state.showEditModal}
         >

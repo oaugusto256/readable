@@ -19,7 +19,7 @@ export default (props) => {
         </div>
         <div className="flex flex-row-reverse">
           <button
-            onClick={props.save}
+            onClick={props.create}
             className="button-save"
           >
             Create

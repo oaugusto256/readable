@@ -4,28 +4,63 @@ import Post from './Post';
 import Button from './Button';
 import Error from './Error';
 import CreateModal from './CreateModal';
+import Input from './Input';
+import TextArea from './TextArea';
 import _ from 'underscore';
 
 export default class ListPosts extends Component {
   state = {
     sortBy: '',
+    postBody: '',
+    postTitle: '',
+    postAuthor: '',
+    postCategory: '',
     showCreateModal: false,
+  }
+
+  handleCreatePost = () => {
+    const post = {
+      title: this.state.postTitle,
+      body: this.state.postBody,
+      author: this.state.postAuthor,
+      category: this.state.postCategory
+    }
+
+    this.props.createPost(post);
+
+    this.setState({
+      postBody: '',
+      postTitle: '',
+      postAuthor: '',
+      postCategory: '',
+      showCreateModal: false,
+    })
+  }
+
+  handleInputChange = (event) => {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
   }
 
   handleOpenCreate = () => {
     this.setState({
-      showCreateModal: true
-    });
+      postBody: '',
+      postTitle: '',
+      postAuthor: '',
+      postCategory: '',
+      showCreateModal: true,
+    })
   }
 
   handleCloseCreate = () => {
     this.setState({
       showCreateModal: false
     });
-  }
-
-  handleSortBy = (event) => {
-    this.setState({ sortBy: event.target.value });
   }
 
   renderPosts = () => {
@@ -73,9 +108,9 @@ export default class ListPosts extends Component {
 
             <div className="sort-by-container">
               <p>Sort by:</p>
-              <select value={this.state.sortBy} onChange={this.handleSortBy}>
+              <select name="sortBy" value={this.state.sortBy} onChange={this.handleInputChange}>
                 <option value="" disabled>Option</option>
-                <option value="commentCount">Comment</option>
+                <option value="voteScore">Vote</option>
                 <option value="timestamp">Date</option>
               </select>
             </div>
@@ -83,9 +118,38 @@ export default class ListPosts extends Component {
         </div>
         <CreateModal
           title={'New Story'}
+          create={this.handleCreatePost}
           close={this.handleCloseCreate}
           isOpen={this.state.showCreateModal}
-        />
+        >
+          <Input
+              label='Title'
+              name='postTitle'
+              value={this.state.postTitle}
+              onChange={this.handleInputChange}
+          />
+          <Input
+              label='Author'
+              name='postAuthor'
+              value={this.state.postAuthor}
+              onChange={this.handleInputChange}
+          />
+          <div className="post-category-container">
+            <p className="label">Category</p>
+            <select name='postCategory' value={this.state.postCategory} onChange={this.handleInputChange}>
+              <option value="" disabled>Select an option</option>
+              <option value="react">React</option>
+              <option value="redux">Redux</option>
+              <option value="udacity">Udacity</option>
+            </select>
+          </div>
+          <TextArea
+              label='Body'
+              name='postBody'
+              value={this.state.postBody}
+              onChange={this.handleInputChange}
+          />
+        </CreateModal>
       </div>
     )
   }

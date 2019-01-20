@@ -5,6 +5,7 @@ import {
   UPDATE_POSTS,
   SUCCESS_GETTING_POST,
   SUCCESS_GETTING_POSTS,
+  SUCCESS_CREATING_POST,
   SUCCESS_GETTING_POST_COMMENTS
 } from './types';
 
@@ -30,6 +31,37 @@ export const getPosts = () => {
       .then(res => {
         dispatch({
           type: SUCCESS_GETTING_POSTS,
+          payload: res.data
+        })
+      })
+      .catch(err => {
+        console.log(err)
+      });
+  }
+}
+
+export const createPost = (post) => {
+  return dispatch => {
+    dispatch({
+      type: LOADING
+    })
+
+      axios({
+        method: 'post',
+        headers: headers,
+        url: `${api}/posts`,
+        data: {
+          id: Math.random().toString(36).substr(-8),
+          timestamp: Date.now(),
+          title: post.title,
+          body: post.body,
+          author: post.author,
+          category: post.category
+        }
+      })
+      .then(res => {
+        dispatch({
+          type: SUCCESS_CREATING_POST,
           payload: res.data
         })
       })
