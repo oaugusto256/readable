@@ -46,6 +46,7 @@ export default class ListComments extends Component {
             <Comment
               key={comment.id}
               comment={comment}
+              voteComment={this.props.voteComment}
               editComment={this.props.editComment}
               deleteComment={this.props.deleteComment}
             />

@@ -70,7 +70,7 @@ class Comment extends Component {
   }
 
   render() {
-    const { comment, votePost } = this.props;
+    const { comment, voteComment } = this.props;
 
     const day = Date(comment.timestamp*1000).substring(8,10);
     const month =  Date(comment.timestamp*1000).substring(4,7);
@@ -90,11 +90,11 @@ class Comment extends Component {
           <hr/>
           <div className="mt-4 flex justify-content-between">
             <div className="flex align-items-center">
-              <div className="vote-icon" onClick={() => console.log("Up vote!")}>
+              <div className="vote-icon" onClick={() => voteComment(comment.id, "upVote")}>
                 <FaThumbsUp />
               </div>
               <span className="vote-score">{comment.voteScore}</span>
-              <div className="vote-icon" onClick={() => console.log("Down vote!")}>
+              <div className="vote-icon" onClick={() => voteComment(comment.id, "downVote")}>
                 <FaThumbsDown />
               </div>
               <div className="menu-icon ml-4 mr-2">

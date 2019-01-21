@@ -249,3 +249,25 @@ export const editComment = (comment) => {
     });
   }
 }
+
+export const voteComment = (commentId, voteOption) => {
+  return dispatch => {
+    axios({
+      method: 'post',
+      headers: headers,
+      url: `${api}/comments/${commentId}`,
+      data: {
+        option: voteOption
+      }
+    })
+    .then(res => {
+      dispatch({
+        type: UPDATE_COMMENT,
+        payload: res.data
+      })
+    })
+    .catch(err => {
+      console.log(err);
+    });
+  }
+}
