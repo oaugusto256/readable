@@ -5,7 +5,7 @@ import {
   SUCCESS_GETTING_CATEGORY_POSTS
 } from './types';
 
-const api = process.env.NODE_ENV === 'development' ? "http://localhost:3001" :  '';
+const api = process.env.NODE_ENV === 'development' ? "http://localhost:3001" :  'https://readable-udacity-api.herokuapp.com/';
 
 let token = localStorage.token
 if (!token)
