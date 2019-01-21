@@ -3,7 +3,7 @@ import {
   LOADING,
 } from './types';
 
-const api = process.env.NODE_ENV === 'development' ? "http://localhost:3001" :  'https://readable-udacity-api.herokuapp.com/';
+const api = process.env.NODE_ENV === 'development' ? "http://localhost:3001" :  'https://readable-udacity-api.herokuapp.com';
 
 // Generate a unique token for storing your bookshelf data on the backend server.
 let token = localStorage.token

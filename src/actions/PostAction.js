@@ -12,7 +12,7 @@ import {
   SUCCESS_GETTING_POST_COMMENTS
 } from './types';
 
-const api = process.env.NODE_ENV === 'development' ? "http://localhost:3001" :  'https://readable-udacity-api.herokuapp.com/';
+const api = process.env.NODE_ENV === 'development' ? "http://localhost:3001" :  'https://readable-udacity-api.herokuapp.com';
 
 let token = localStorage.token
 if (!token)
