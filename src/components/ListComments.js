@@ -44,8 +44,10 @@ export default class ListComments extends Component {
         comments.map(comment => {
           return (
             <Comment
-              comment={comment}
               key={comment.id}
+              comment={comment}
+              editComment={this.props.editComment}
+              deleteComment={this.props.deleteComment}
             />
           )
         })

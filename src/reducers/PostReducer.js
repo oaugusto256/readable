@@ -7,6 +7,8 @@ import {
   SUCCESS_GETTING_POSTS,
   SUCCESS_CREATING_COMMENT,
   SUCCESS_GETTING_POST_COMMENTS,
+  DELETE_COMMENT,
+  UPDATE_COMMENT,
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -17,9 +19,32 @@ const INITIAL_STATE = {
 };
 
 let updatedPosts = [];
+let updatedComments = [];
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case DELETE_COMMENT:
+      return {
+        ...state,
+        postComments: [...state.postComments.filter(comment => {
+          return (comment.id !== action.payload)
+        })]
+      }
+    case UPDATE_COMMENT:
+      updatedComments = state.postComments.map((item) => {
+        if (item.id !== action.payload.id)
+          return item
+
+        return {
+          ...item,
+          ...action.payload
+        }
+      })
+
+      return {
+        ...state,
+        postComments: [...updatedComments]
+      }
     case SUCCESS_CREATING_COMMENT:
       return {
         ...state,

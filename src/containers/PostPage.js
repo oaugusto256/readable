@@ -3,7 +3,7 @@ import Loading from '../components/Loading';
 import PostDetail from '../components/PostDetail';
 import ListComments from '../components/ListComments';
 import { connect } from "react-redux";
-import { getPosts, getPostComments, votePost, editPost, deletePost, createComment } from '../actions/PostAction';
+import { getPosts, getPostComments, votePost, editPost, deletePost, createComment, editComment, deleteComment } from '../actions/PostAction';
 
 class PostPage extends Component {
   state = {
@@ -45,6 +45,8 @@ class PostPage extends Component {
                     postId={this.state.postId}
                     comments={this.props.comments}
                     createComment={this.props.createComment}
+                    editComment={this.props.editComment}
+                    deleteComment={this.props.deleteComment}
                   />
                 </div>
                 <div className="col-lg-2"></div>
@@ -69,5 +71,7 @@ export default connect(mapStateToProps, {
   editPost,
   deletePost,
   createComment,
+  editComment,
+  deleteComment,
   getPostComments,
 })(PostPage);

@@ -9,7 +9,7 @@ import DeleteModal from './DeleteModal';
 class Comment extends Component {
   state = {
     commentBody: '',
-    commentTitle: '',
+    commentAuthor: '',
     showEditModal: false,
     showDeleteModal: false,
   }
@@ -25,9 +25,9 @@ class Comment extends Component {
   }
 
   handleDeleteComment = () => {
-    const postId = this.props.post.id;
+    const commentId = this.props.comment.id;
 
-    this.props.deletePost(postId);
+    this.props.deleteComment(commentId);
 
     this.setState({
       showDeleteModal: false
@@ -35,13 +35,12 @@ class Comment extends Component {
   }
 
   handleEditComment = () => {
-    const postId = this.props.post.id;
-    const post = {
-      title: this.state.postTitle,
-      body: this.state.postBody
+    const comment = {
+      body: this.state.commentBody,
+      id: this.props.comment.id
     }
 
-    this.props.editPost(postId, post);
+    this.props.editComment(comment);
 
     this.setState({
       showEditModal: false
@@ -51,9 +50,13 @@ class Comment extends Component {
   handleOpenEdit = () => {
     this.setState({
       showEditModal: true,
-      commentTitle: this.props.post.title,
-      commentBody: this.props.post.body
+      commentAuthor: this.props.comment.author,
+      commentBody: this.props.comment.body
     });
+  }
+
+  handleCloseDelete = () => {
+    this.setState({ showDeleteModal: false });
   }
 
   handleOpenDelete = () => {
@@ -64,14 +67,6 @@ class Comment extends Component {
 
   handleCloseEdit = () => {
     this.setState({ showEditModal: false });
-  }
-
-  handleCloseDelete = () => {
-    this.setState({ showDeleteModal: false });
-  }
-
-  renderPostComments = () => {
-
   }
 
   render() {
@@ -113,31 +108,31 @@ class Comment extends Component {
             </div>
           </div>
         </div>
-        {/* <EditModal
-          title='Edit story'
-          edit={this.handleEditPost}
+        <EditModal
+          title='Edit comment'
+          edit={this.handleEditComment}
           close={this.handleCloseEdit}
           isOpen={this.state.showEditModal}
         >
           <Input
-              label='Title'
-              name='postTitle'
-              value={this.state.postTitle}
+              label='Author'
+              name='commentAuthor'
+              value={this.state.commentAuthor}
               onChange={this.handleInputChange}
           />
           <TextArea
               label='Body'
-              name='postBody'
-              value={this.state.postBody}
+              name='commentBody'
+              value={this.state.commentBody}
               onChange={this.handleInputChange}
           />
         </EditModal>
         <DeleteModal
-          title={this.props.post.title}
-          delete={this.handleDeletePost}
+          title={'Deleting response...'}
+          delete={this.handleDeleteComment}
           close={this.handleCloseDelete}
           isOpen={this.state.showDeleteModal}
-        /> */}
+        />
       </>
     )
   }

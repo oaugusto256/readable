@@ -2,7 +2,9 @@ import axios from 'axios';
 import {
   LOADING,
   DELETE_POST,
+  DELETE_COMMENT,
   UPDATE_POSTS,
+  UPDATE_COMMENT,
   SUCCESS_GETTING_POST,
   SUCCESS_GETTING_POSTS,
   SUCCESS_CREATING_POST,
@@ -202,6 +204,48 @@ export const createComment = (comment) => {
     })
     .catch(err => {
       console.log(err)
+    });
+  }
+}
+
+export const deleteComment = (commentId) => {
+  return dispatch => {
+    axios({
+      method: 'delete',
+      headers: headers,
+      url: `${api}/comments/${commentId}`
+    })
+    .then(res => {
+      dispatch({
+        type: DELETE_COMMENT,
+        payload: res.data.id
+      })
+    })
+    .catch(err => {
+      console.log(err);
+    });
+  }
+}
+
+export const editComment = (comment) => {
+  return dispatch => {
+    axios({
+      method: 'put',
+      headers: headers,
+      url: `${api}/comments/${comment.id}`,
+      data: {
+        timestamp: Date.now(),
+        body: comment.body,
+      }
+    })
+    .then(res => {
+      dispatch({
+        type: UPDATE_COMMENT,
+        payload: res.data
+      })
+    })
+    .catch(err => {
+      console.log(err);
     });
   }
 }
